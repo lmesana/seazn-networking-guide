@@ -193,6 +193,55 @@
       .cards-grid { grid-template-columns: 1fr; }
       #pitch-section { padding-left: 18px; padding-right: 18px; }
     }
+
+    /* MEETING NOTES */
+    .notes-toggle { width:100%; background:none; border:none; border-top:1px solid #f3f4f6;
+      padding:10px 22px; display:flex; align-items:center; gap:8px; cursor:pointer;
+      font-size:12px; font-weight:700; color:#9ca3af; text-align:left;
+      transition:background 0.15s, color 0.15s; }
+    .notes-toggle:hover { background:#f9fafb; color:#4A6741; }
+    .notes-toggle.has-notes { color:#4A6741; background:#EBF3E8; }
+    .notes-toggle .notes-preview { font-weight:400; font-style:italic; color:#6b7280;
+      margin-left:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+      max-width:300px; }
+    .notes-toggle .toggle-arrow { margin-left:auto; transition:transform 0.2s; font-style:normal; }
+    .notes-toggle.open .toggle-arrow { transform:rotate(90deg); }
+
+    .notes-body { display:none; padding:14px 22px 18px; background:#fafafa;
+      border-top:1px solid #f3f4f6; }
+    .notes-body.open { display:block; }
+
+    .notes-textarea { width:100%; min-height:90px; padding:11px 13px; font-size:13px;
+      font-family:inherit; border:1.5px solid #e5e7eb; border-radius:10px;
+      resize:vertical; outline:none; background:white; color:#374151; line-height:1.6;
+      transition:border-color 0.2s; box-sizing:border-box; }
+    .notes-textarea:focus { border-color:#4A6741; }
+    .notes-textarea::placeholder { color:#d1d5db; }
+
+    .notes-controls { display:flex; align-items:center; gap:8px; margin-top:9px; flex-wrap:wrap; }
+    .notes-timestamp { font-size:11px; color:#9ca3af; margin-left:auto; }
+
+    .btn-record { display:flex; align-items:center; gap:6px; padding:7px 14px;
+      border:1.5px solid #e5e7eb; border-radius:8px; background:white; cursor:pointer;
+      font-size:12px; font-weight:600; color:#6b7280; transition:all 0.2s; }
+    .btn-record:hover { border-color:#E07A54; color:#E07A54; }
+    .btn-record.recording { background:#fff1f0; border-color:#ef4444; color:#ef4444;
+      animation:pulse-record 1.4s ease-in-out infinite; }
+    @keyframes pulse-record {
+      0%,100% { box-shadow:0 0 0 0 rgba(239,68,68,0.3); }
+      50%      { box-shadow:0 0 0 6px rgba(239,68,68,0); }
+    }
+    .btn-record .rec-dot { width:8px; height:8px; border-radius:50%;
+      background:currentColor; display:inline-block; }
+
+    .btn-clear { padding:7px 12px; border:1.5px solid #e5e7eb; border-radius:8px;
+      background:white; cursor:pointer; font-size:12px; font-weight:600; color:#9ca3af;
+      transition:all 0.2s; }
+    .btn-clear:hover { border-color:#ef4444; color:#ef4444; }
+
+    .interim-text { font-size:12px; color:#9ca3af; font-style:italic;
+      margin-top:6px; min-height:16px; line-height:1.5; }
+    .speech-unsupported { font-size:11.5px; color:#f59e0b; margin-top:6px; }
   </style>
 </head>
 <body>
@@ -1908,5 +1957,202 @@
     event.target.classList.add('active');
   }
 </script>
+
+<!-- ═══════════ MEETING NOTES SYSTEM ═══════════ -->
+<script>
+(function() {
+  const STORAGE_PREFIX = 'seazn_note_';
+
+  function slugify(name) {
+    return name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+  }
+
+  function formatTime() {
+    const now = new Date();
+    return now.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'})
+      + ' · ' + now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'});
+  }
+
+  function saveNote(slug, text) {
+    localStorage.setItem(STORAGE_PREFIX + slug, JSON.stringify({
+      text: text,
+      timestamp: formatTime()
+    }));
+  }
+
+  function loadNote(slug) {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_PREFIX + slug) || 'null');
+    } catch(e) { return null; }
+  }
+
+  function buildNotesSection(slug, card) {
+    const saved = loadNote(slug);
+    const hasNotes = saved && saved.text && saved.text.trim();
+
+    // --- Toggle button ---
+    const toggle = document.createElement('button');
+    toggle.className = 'notes-toggle' + (hasNotes ? ' has-notes' : '');
+    toggle.innerHTML =
+      '<span>📝</span>' +
+      '<span>' + (hasNotes ? 'Meeting notes' : 'Add meeting notes') + '</span>' +
+      (hasNotes ? '<span class="notes-preview">— ' + saved.text.trim().slice(0,60) + (saved.text.length > 60 ? '…' : '') + '</span>' : '') +
+      '<span class="toggle-arrow">▸</span>';
+
+    // --- Body ---
+    const body = document.createElement('div');
+    body.className = 'notes-body';
+    body.innerHTML =
+      '<textarea class="notes-textarea" placeholder="Type your notes here, or use the voice button to dictate…">' +
+      (hasNotes ? saved.text : '') +
+      '</textarea>' +
+      '<div class="interim-text"></div>' +
+      '<div class="notes-controls">' +
+        '<button class="btn-record"><span class="rec-dot"></span> Voice note</button>' +
+        '<button class="btn-clear">Clear</button>' +
+        '<span class="notes-timestamp">' + (saved && saved.timestamp ? 'Saved ' + saved.timestamp : '') + '</span>' +
+      '</div>';
+
+    // Toggle open/close
+    toggle.addEventListener('click', function() {
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      toggle.classList.toggle('open', !isOpen);
+    });
+
+    // Auto-save on typing (debounced)
+    const textarea = body.querySelector('.notes-textarea');
+    const tsEl     = body.querySelector('.notes-timestamp');
+    let saveTimer;
+    textarea.addEventListener('input', function() {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function() {
+        saveNote(slug, textarea.value);
+        tsEl.textContent = 'Saved ' + formatTime();
+        // Update toggle preview
+        const preview = toggle.querySelector('.notes-preview');
+        const hasText = textarea.value.trim().length > 0;
+        toggle.classList.toggle('has-notes', hasText);
+        toggle.querySelectorAll('span')[1].textContent = hasText ? 'Meeting notes' : 'Add meeting notes';
+        if (hasText) {
+          if (!preview) {
+            const sp = document.createElement('span');
+            sp.className = 'notes-preview';
+            toggle.insertBefore(sp, toggle.querySelector('.toggle-arrow'));
+          }
+          toggle.querySelector('.notes-preview').textContent =
+            '— ' + textarea.value.trim().slice(0,60) + (textarea.value.length > 60 ? '…' : '');
+        } else if (preview) {
+          preview.remove();
+        }
+      }, 800);
+    });
+
+    // Clear button
+    body.querySelector('.btn-clear').addEventListener('click', function() {
+      if (!textarea.value.trim()) return;
+      if (!confirm('Clear notes for this person?')) return;
+      textarea.value = '';
+      saveNote(slug, '');
+      tsEl.textContent = '';
+      toggle.classList.remove('has-notes');
+      toggle.querySelectorAll('span')[1].textContent = 'Add meeting notes';
+      const preview = toggle.querySelector('.notes-preview');
+      if (preview) preview.remove();
+    });
+
+    // --- Voice recording ---
+    const recBtn    = body.querySelector('.btn-record');
+    const interimEl = body.querySelector('.interim-text');
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      recBtn.style.display = 'none';
+      interimEl.className = 'speech-unsupported';
+      interimEl.textContent = '⚠ Voice notes require Chrome';
+    } else {
+      let recognition = null;
+      let isRecording = false;
+
+      recBtn.addEventListener('click', function() {
+        if (isRecording) {
+          recognition.stop();
+          return;
+        }
+
+        recognition = new SpeechRecognition();
+        recognition.continuous      = true;
+        recognition.interimResults  = true;
+        recognition.lang            = 'en-US';
+
+        recognition.onstart = function() {
+          isRecording = true;
+          recBtn.classList.add('recording');
+          recBtn.innerHTML = '<span class="rec-dot"></span> Stop recording';
+          interimEl.textContent = '🎙 Listening…';
+        };
+
+        recognition.onresult = function(e) {
+          let interim = '';
+          let final   = '';
+          for (let i = e.resultIndex; i < e.results.length; i++) {
+            const t = e.results[i][0].transcript;
+            if (e.results[i].isFinal) final += t + ' ';
+            else interim += t;
+          }
+          if (final) {
+            // Append final transcript to textarea
+            const prefix = textarea.value.trim() ? textarea.value.trimEnd() + ' ' : '';
+            textarea.value = prefix + final.trim();
+            textarea.dispatchEvent(new Event('input'));
+          }
+          interimEl.textContent = interim ? '…' + interim : '🎙 Listening…';
+        };
+
+        recognition.onerror = function(e) {
+          interimEl.textContent = e.error === 'not-allowed'
+            ? '⚠ Microphone access denied — please allow mic in browser settings'
+            : '⚠ Error: ' + e.error;
+        };
+
+        recognition.onend = function() {
+          isRecording = false;
+          recBtn.classList.remove('recording');
+          recBtn.innerHTML = '<span class="rec-dot"></span> Voice note';
+          interimEl.textContent = '';
+        };
+
+        recognition.start();
+      });
+    }
+
+    // Append to card
+    card.appendChild(toggle);
+    card.appendChild(body);
+
+    // Auto-open if has notes
+    if (hasNotes) {
+      toggle.classList.add('open');
+      body.classList.add('open');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.card').forEach(function(card) {
+      const nameEl = card.querySelector('.card-name');
+      if (!nameEl) return;
+      // Get plain text name (strip badges/icons)
+      const name = Array.from(nameEl.childNodes)
+        .filter(n => n.nodeType === 3) // text nodes only
+        .map(n => n.textContent.trim())
+        .join('') || nameEl.textContent.trim();
+      const slug = slugify(name);
+      buildNotesSection(slug, card);
+    });
+  });
+})();
+</script>
+<!-- ═══════════ END MEETING NOTES ═══════════ -->
+
 </body>
 </html>
