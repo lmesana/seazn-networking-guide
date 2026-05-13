@@ -242,6 +242,24 @@
     .interim-text { font-size:12px; color:#9ca3af; font-style:italic;
       margin-top:6px; min-height:16px; line-height:1.5; }
     .speech-unsupported { font-size:11.5px; color:#f59e0b; margin-top:6px; }
+
+    .cat-workshop { background: #fef3c7; color: #92400e; }
+    .card.cat-workshop { border-top: 3px solid #f59e0b; }
+    .workshop-insights { background: linear-gradient(135deg, #fffbeb 0%, #fef9ee 100%);
+      border: 1px solid #fde68a; border-left: 5px solid #f59e0b;
+      border-radius: 14px; padding: 20px 24px; margin-bottom: 20px; }
+    .workshop-insights summary { font-size: 14px; font-weight: 700; color: #92400e;
+      cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; }
+    .workshop-insights summary::-webkit-details-marker { display: none; }
+    .workshop-insights summary::after { content: '▸'; margin-left: auto; color: #f59e0b; transition: transform 0.2s; }
+    .workshop-insights[open] summary::after { transform: rotate(90deg); }
+    .insight-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px; margin-top: 16px; }
+    .insight-card { background: white; border: 1px solid #fde68a; border-radius: 10px;
+      padding: 13px 15px; }
+    .insight-tag { font-size: 10px; font-weight: 800; letter-spacing: 1.3px;
+      text-transform: uppercase; color: #b45309; margin-bottom: 5px; }
+    .insight-text { font-size: 12.5px; color: #374151; line-height: 1.6; }
   </style>
 </head>
 <body>
@@ -416,11 +434,12 @@
 
 <!-- TABS -->
 <div class="tabs-bar">
-  <button class="tab-btn active" onclick="filterCards('all',this)">All Contacts <span class="tab-count">14</span></button>
+  <button class="tab-btn active" onclick="filterCards('all',this)">All Contacts <span class="tab-count">20</span></button>
   <button class="tab-btn" onclick="filterCards('investor',this)">💼 Investors <span class="tab-count">8</span></button>
   <button class="tab-btn" onclick="filterCards('service',this)">🔧 Service Providers <span class="tab-count">2</span></button>
   <button class="tab-btn" onclick="filterCards('partner',this)">🤝 Partners <span class="tab-count">5</span></button>
   <button class="tab-btn" onclick="filterCards('innovator',this)">💡 Innovators <span class="tab-count">1</span></button>
+  <button class="tab-btn" onclick="filterCards('workshop',this)">🎓 Workshop <span class="tab-count">4</span></button>
   <button class="tab-btn" onclick="filterCards('pitch',this)" style="margin-left:auto; color:#E07A54; border-bottom-color:transparent;">⚡ seazn Pitch <span class="tab-count" style="background:#EBF3E8;color:#4A6741;">↗</span></button>
 </div>
 
@@ -2037,6 +2056,274 @@
 
   </div>
 </div>
+
+
+<!-- ═══ WORKSHOP ═══ -->
+<div class="person-section" data-category="workshop">
+  <div class="category-header">
+    <div class="category-label cat-workshop">🎓 Workshop Panelists</div>
+    <p class="category-desc">Met at "Venture Capitalists: Friend or Foe?" · Wed 13 May · 1:35 PM · Follow up on LinkedIn with a personalised note referencing the panel.</p>
+  </div>
+
+  <!-- WORKSHOP INSIGHTS ACCORDION -->
+  <details class="workshop-insights" open>
+    <summary>💡 Your Key Takeaways — "Venture Capitalists: Friend or Foe?" (Wed 13 May · 1:35 PM)</summary>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <p class="insight-tag">💼 Partner, Not Just Money</p>
+        <p class="insight-text">Think carefully about whether you want an investor helping make decisions — they don't need a board seat, but you can <strong>treat your lead investor like a board member</strong>: quarterly meetings, ask for their opinion, be transparent. Choose the right partner, not just the highest cheque.</p>
+      </div>
+      <div class="insight-card">
+        <p class="insight-tag">👁 Board Observer Option</p>
+        <p class="insight-text">A <strong>board observer</strong> (non-voting) is a smart early-stage compromise — gives investors visibility and makes them feel like partners without giving away governance. Consider this over a full board seat at pre-seed.</p>
+      </div>
+      <div class="insight-card">
+        <p class="insight-tag">🧭 Advisory vs Corporate Board</p>
+        <p class="insight-text">At early stage: lean on an <strong>advisory board</strong> over a corporate board. Advisors bring domain expertise and open doors without the governance complexity. Structure corporate board carefully and only when needed.</p>
+      </div>
+      <div class="insight-card">
+        <p class="insight-tag">🚀 Show the Series A Path</p>
+        <p class="insight-text">Even at pre-seed: <strong>show investors you're already thinking about Series A</strong> and how you'll get there. What milestones will you hit with this round? What does the company look like at Series A? Investors want to see you think ahead.</p>
+      </div>
+      <div class="insight-card">
+        <p class="insight-tag">🫀 Pre-seed = Story Over Numbers</p>
+        <p class="insight-text">Pre-seed investors <strong>invest in you as a person</strong> far more than your company. Lead with why you're the right founder to solve this problem. Make it personal, compelling, and specific. Numbers matter less than conviction and founder-market fit.</p>
+      </div>
+      <div class="insight-card">
+        <p class="insight-tag">🤖 Leverage AI to De-Risk</p>
+        <p class="insight-text">Show investors you're <strong>using AI to de-risk the business</strong> — faster product iteration, better personalisation, lower cost to serve. In 2026, not mentioning AI is a red flag. Make it central to how you describe the product and defensibility.</p>
+      </div>
+      <div class="insight-card">
+        <p class="insight-tag">📈 Momentum is the Metric</p>
+        <p class="insight-text"><strong>Investors invest in momentum.</strong> Come with numbers that show direction — even if small. Month-over-month user growth, engagement depth, interview volume, social following growth. Show the trajectory, not just the snapshot.</p>
+      </div>
+      <div class="insight-card">
+        <p class="insight-tag">✅ Follow-Up Action</p>
+        <p class="insight-text">Add all panelists on LinkedIn with a <strong>personalised message</strong> referencing a specific insight from the panel. Don't use the default LinkedIn message. Keep it short: what you took away + one sentence on seazn.</p>
+      </div>
+    </div>
+  </details>
+
+  <div class="cards-grid">
+
+    <!-- SONIA FARBER -->
+    <div class="card cat-workshop">
+      <div class="card-top">
+        <div class="avatar" style="background:linear-gradient(135deg,#92400e,#b45309);">SF</div>
+        <div class="card-identity">
+          <div class="card-name">Sonia Farber</div>
+          <div class="card-role">Partner · Perkins Coie (formerly Co-Founder, Kluk Farber Law)</div>
+          <div class="meeting-time">📅 Workshop · Wed 13 May · 1:35 PM</div>
+          <div class="links-row">
+            <a class="ext-link link-linkedin" href="https://www.linkedin.com/search/results/all/?keywords=Sonia+Farber+Perkins+Coie" target="_blank">💼 LinkedIn</a>
+            <a class="ext-link link-web" href="https://perkinscoie.com/professionals/sonia-farber" target="_blank">🌐 Perkins Coie Profile</a>
+          </div>
+        </div>
+        <span class="category-badge cat-workshop">Lawyer</span>
+      </div>
+      <div class="card-body">
+        <p class="section-title" style="color:#6b7280">📋 BIO</p>
+        <p class="bio-text">Sonia co-founded Kluk Farber Law in 2017 — a boutique firm entirely dedicated to startups and emerging companies — before Perkins Coie acquired the team in 2022. She started at Debevoise &amp; Plimpton (7 years) and clerked for a federal judge in the SDNY. Today she advises founders across SaaS, consumer tech, health tech, AI, and CPG through every phase from formation to exit. She's one of the sharpest legal minds in the NYC startup ecosystem, with a particular fluency in VC deal structures and founder protections.</p>
+        <div class="angle-box">
+          <p class="section-title">🎯 YOUR ANGLE</p>
+          <p class="angle-text">Sonia is the legal expert you want in your corner as you approach a fundraise. She understands VC deal terms from both sides — she's advised founders through hundreds of rounds. The follow-up here isn't a pitch; it's a relationship. Ask whether she takes early-stage health tech clients and what a first engagement typically looks like. A good startup lawyer is one of the highest-leverage relationships a pre-seed founder can have.</p>
+        </div>
+        <div class="pitch-box">
+          <p class="section-title">💬 FOLLOW-UP ANGLE</p>
+          <ul class="pitch-list">
+            <li>"I'm the founder of seazn, an AI-powered perimenopause health companion — approaching our first fundraise. Your comments on founder protections and board structure at the panel were exactly what I needed to hear. Would love to know if Perkins Coie works with early-stage health tech companies at our stage."</li>
+            <li>Ask specifically about her experience with health tech / digital health — HIPAA-adjacent legal considerations, term sheet review, and founder equity protection are all live issues for seazn.</li>
+            <li>Reference a specific thing she said in the panel — shows you were paying attention and makes the outreach personal.</li>
+          </ul>
+        </div>
+        <details class="qa-accordion">
+          <summary>🎤 Q&amp;A Prep — Questions to ask &amp; questions to expect</summary>
+          <div class="qa-inner">
+            <div class="qa-ask">
+              <p class="qa-col-title">Questions to ask her</p>
+              <ul class="qa-list">
+                <li>"Do you work with pre-seed health tech companies, and what does a first engagement with Perkins Coie typically look like at our stage?"</li>
+                <li>"For a company like seazn — AI-powered, HIPAA-adjacent, approaching a friends &amp; family round — what are the two or three legal things I should be getting right now, before I talk to investors?"</li>
+                <li>"What's the most common legal mistake you see founders make when raising their first round?"</li>
+              </ul>
+            </div>
+            <div class="qa-prep">
+              <p class="qa-col-title">What she might ask you</p>
+              <ul class="qa-list">
+                <li><p class="qa-q">"What stage are you at?"</p><p class="qa-a">Pre-seed, friends &amp; family round opening. Web app in active beta, 15 users, approaching first institutional conversations. Tell her where you are in the fundraise and what you're building toward.</p></li>
+                <li><p class="qa-q">"Have you incorporated yet? What structure?"</p><p class="qa-a">Know your cap table, incorporation state (Delaware C-corp is standard), and current equity structure before this conversation.</p></li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- EMMA SILVERMAN -->
+    <div class="card cat-workshop">
+      <div class="card-top">
+        <div class="avatar" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);">ES</div>
+        <div class="card-identity">
+          <div class="card-name">Emma Silverman</div>
+          <div class="card-role">Partner · TMV (Care Economy &amp; Future of Work)</div>
+          <div class="meeting-time">📅 Workshop · Wed 13 May · 1:35 PM</div>
+          <div class="links-row">
+            <a class="ext-link link-linkedin" href="https://www.linkedin.com/in/emmacsilverman" target="_blank">💼 LinkedIn</a>
+            <a class="ext-link link-web" href="https://tmv.vc/team/emma-silverman/" target="_blank">🌐 TMV Profile</a>
+          </div>
+        </div>
+        <span class="category-badge cat-workshop">Investor</span>
+      </div>
+      <div class="card-body">
+        <p class="section-title" style="color:#6b7280">📋 BIO</p>
+        <p class="bio-text">Emma is a Partner at TMV, where she invests in the Care Economy and Future of Work at Seed and Series A — writing cheques from $100K to $5M across the US and EMEA. Her portfolio includes Ours, Millie, Bonside, and Preveta. Before investing, she was an operator: first hire at Flamingo (Harry's Labs direct-to-consumer brand), oversaw the nationwide Target launch, then exec at Truebird Coffee before joining TMV. She started at Bain &amp; Company. TMV's Care Economy mandate maps closely onto women's health and digital health.</p>
+        <div class="angle-box">
+          <p class="section-title">🎯 YOUR ANGLE</p>
+          <p class="angle-text">Emma's "Care Economy" thesis is a natural home for seazn — perimenopause is fundamentally a care gap for one of the most underserved populations in the healthcare system. She's also an ex-operator who built consumer brands, so she understands product-market fit, retention, and community building in ways that purely financial investors don't. Lead with the mission and the market, then let her operator instincts engage with the product story. Her check size range ($100K–$5M) fits a friends &amp; family to pre-seed raise.</p>
+        </div>
+        <div class="pitch-box">
+          <p class="section-title">💬 FOLLOW-UP ANGLE</p>
+          <ul class="pitch-list">
+            <li>"TMV's Care Economy thesis feels like a direct match for seazn — we're building the AI-powered health companion for perimenopause, a care gap affecting 1.2 billion women globally. I'd love 20 minutes to show you what we're building."</li>
+            <li>Reference her operator background: "Your experience at Flamingo building a consumer brand with a strong community resonates — that's exactly the playbook we're running for seazn's early user cohort."</li>
+            <li>Ask about what she looks for at Seed stage in Care Economy companies — her answer will tell you exactly how to frame the next conversation.</li>
+          </ul>
+        </div>
+        <details class="qa-accordion">
+          <summary>🎤 Q&amp;A Prep — Questions to ask &amp; questions to expect</summary>
+          <div class="qa-inner">
+            <div class="qa-ask">
+              <p class="qa-col-title">Questions to ask her</p>
+              <ul class="qa-list">
+                <li>"How does TMV think about perimenopause specifically within the Care Economy mandate — is it on your radar as an investment category?"</li>
+                <li>"What do you look for at Seed stage that tells you a care economy company has real product-market fit — what signals matter most to you?"</li>
+                <li>"Your portfolio includes Preveta and Millie — what's the common thread in why those resonated with you?"</li>
+              </ul>
+            </div>
+            <div class="qa-prep">
+              <p class="qa-col-title">What she might ask you</p>
+              <ul class="qa-list">
+                <li><p class="qa-q">"What's your retention like?"</p><p class="qa-a">Be honest about the stage. "We're 15 users in active beta — our focus right now is engagement depth over breadth. We're measuring daily active use and qualitative feedback. We're not yet optimising retention metrics, but [X behaviour] shows early habit formation."</p></li>
+                <li><p class="qa-q">"How are you thinking about growth — what's the acquisition channel?"</p><p class="qa-a">Healthcare provider referrals, podcast sponsorships, and workplace wellness are the three GTM pillars. Community-first at this stage — we're building loyalty before we build scale.</p></li>
+                <li><p class="qa-q">"What's your round size and timeline?"</p><p class="qa-a">Friends &amp; family round opening now. Building toward pre-seed. State clearly how much you're raising and what you'll do with it.</p></li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- GEORGE RIBAROFF -->
+    <div class="card cat-workshop">
+      <div class="card-top">
+        <div class="avatar" style="background:linear-gradient(135deg,#0891b2,#0e7490);">GR</div>
+        <div class="card-identity">
+          <div class="card-name">George Ribaroff, MD</div>
+          <div class="card-role">Principal · Meridian Street Capital (Healthcare &amp; Digital Health)</div>
+          <div class="meeting-time">📅 Workshop · Wed 13 May · 1:35 PM</div>
+          <div class="links-row">
+            <a class="ext-link link-linkedin" href="https://www.linkedin.com/in/george-ribaroff" target="_blank">💼 LinkedIn</a>
+            <a class="ext-link link-web" href="https://msc.vc/team" target="_blank">🌐 Meridian Team</a>
+          </div>
+        </div>
+        <span class="category-badge cat-workshop">Investor</span>
+      </div>
+      <div class="card-body">
+        <p class="section-title" style="color:#6b7280">📋 BIO</p>
+        <p class="bio-text">George is a medical doctor (University of Edinburgh) turned venture investor — a rare combination that makes him one of the most clinically credible voices in early-stage digital health VC. At Meridian Street Capital, he leads healthcare and digital health investments at pre-seed and seed, with cheques from $250K to $2.5M (sweet spot $1.5M). Meridian was founded in 2016 and focuses on technology and healthcare at Seed and Series A in NYC. His MD background means he evaluates health tech with both clinical rigour and commercial instinct — he understands what "works" medically as well as what scales.</p>
+        <div class="angle-box">
+          <p class="section-title">🎯 YOUR ANGLE</p>
+          <p class="angle-text">George is one of the highest-value follow-ups from this workshop. An MD who invests in digital health at pre-seed, with a sweet spot cheque size that fits your raise, in NYC. Lead with the clinical credibility of the problem — perimenopause is chronically under-researched and under-treated. He'll immediately understand the clinical gap that seazn addresses. Lean into the AI de-risking angle (a key theme from the panel) and the data flywheel that deepens with every user. Ask how he thinks about clinical validation requirements at pre-seed — his answer is crucial for your roadmap.</p>
+        </div>
+        <div class="pitch-box">
+          <p class="section-title">💬 FOLLOW-UP ANGLE</p>
+          <ul class="pitch-list">
+            <li>"As an MD-turned-investor, you'll immediately understand the clinical gap seazn addresses — perimenopause affects 1.2 billion women for a median of 7.4 years, and the standard of care is still essentially 'good luck figuring it out.' We're changing that with AI."</li>
+            <li>"Your point at the panel about using AI to de-risk the business resonated — that's exactly our architecture. I'd love to show you how FlashForward uses personalised pattern data to anticipate symptoms before they hit."</li>
+            <li>His cheque size ($1.5M sweet spot) aligns well — be ready to discuss round size and terms clearly.</li>
+          </ul>
+        </div>
+        <details class="qa-accordion">
+          <summary>🎤 Q&amp;A Prep — Questions to ask &amp; questions to expect</summary>
+          <div class="qa-inner">
+            <div class="qa-ask">
+              <p class="qa-col-title">Questions to ask him</p>
+              <ul class="qa-list">
+                <li>"As someone with a clinical background, how much weight do you give to clinical validation at pre-seed — is it a prerequisite, or do you back the thesis first and validate later?"</li>
+                <li>"Does Meridian have a specific thesis around women's digital health, or is your mandate broader across healthcare?"</li>
+                <li>"What does a first meeting with Meridian typically look like — deck first, or do you prefer a conversation before the deck?"</li>
+              </ul>
+            </div>
+            <div class="qa-prep">
+              <p class="qa-col-title">What he might ask you</p>
+              <ul class="qa-list">
+                <li><p class="qa-q">"What's the clinical evidence base for your symptom prediction model?"</p><p class="qa-a">"We're building on established perimenopause research — the 7.4-year hot flash duration data, the hormonal fluctuation patterns. Our AI model learns from individual user data over time. We're planning a clinical validation study as part of our pre-seed roadmap, and would love a partner who can help co-design that."</p></li>
+                <li><p class="qa-q">"Is this a wellness app or a medical device?"</p><p class="qa-a">"Wellness application — we operate outside FDA device classification. We're building compliance-forward from day one and monitoring FDA digital health guidance closely. That gives us a faster path to market while maintaining clinical credibility."</p></li>
+                <li><p class="qa-q">"What's the moat — why can't someone replicate this?"</p><p class="qa-a">The moat is trust and longitudinal data. Every month a user stays, her model deepens and becomes more accurate. Switching cost is emotional and data-based. That's irreplicable by a new entrant.</p></li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- CLAIRE BIERNACKI -->
+    <div class="card cat-workshop">
+      <div class="card-top">
+        <div class="avatar" style="background:linear-gradient(135deg,#E07A54,#8FA882);">CB</div>
+        <div class="card-identity">
+          <div class="card-name">Claire Biernacki</div>
+          <div class="card-role">Partner · BBG Ventures (Women &amp; Diverse Founders · Healthcare + AI)</div>
+          <div class="meeting-time">📅 Workshop · Wed 13 May · 1:35 PM</div>
+          <div class="links-row">
+            <a class="ext-link link-linkedin" href="https://www.linkedin.com/in/claire-biernacki-71b1b24a/" target="_blank">💼 LinkedIn</a>
+            <a class="ext-link link-web" href="https://www.bbgventures.com/about-us" target="_blank">🌐 BBG Ventures</a>
+          </div>
+        </div>
+        <span class="category-badge cat-workshop">Investor</span>
+      </div>
+      <div class="card-body">
+        <p class="section-title" style="color:#6b7280">📋 BIO</p>
+        <p class="bio-text">Claire is a Partner at BBG Ventures — one of the most active early-stage investors specifically backing women and underrepresented founders in the US. She was the first investment team member in BBG's Fund I. Her focus is healthcare and vertical AI, and her portfolio includes Spring Health, Zola, and Blueland. Columbia MBA, earlier at Lerer Hippeau (media/consumer VC), Pomona Capital, and Bank of America. BBG is deploying a $50M fund with a clear mandate: back founders like Laura.</p>
+        <div class="angle-box">
+          <p class="section-title">🎯 YOUR ANGLE</p>
+          <p class="angle-text">Claire and BBG are among the clearest mandate-matches in this entire guide. BBG backs women founders. Claire focuses on healthcare and vertical AI. seazn is a women-founded, AI-powered health company. You don't need to explain why you belong in her portfolio — you need to make her feel the urgency of the problem and the quality of the founder. Lead with the mission and the market gap, then let the product demonstrate your clinical and technical credibility. Her $50M fund is actively deploying — ask about current portfolio fit and timeline.</p>
+        </div>
+        <div class="pitch-box">
+          <p class="section-title">💬 FOLLOW-UP ANGLE</p>
+          <ul class="pitch-list">
+            <li>"BBG's mandate is almost a perfect description of seazn — a woman-founded company using vertical AI to address one of the most underserved healthcare categories for women. I'd love to share what we're building."</li>
+            <li>"You mentioned healthcare and vertical AI as your focus areas — seazn's FlashForward is exactly that: a vertical AI model trained on perimenopause symptom patterns, personalised to each user's biology. I think you'd find it interesting."</li>
+            <li>Reference the panel: "Your point about [specific insight] stuck with me — it directly applies to how we're thinking about our pre-seed strategy. Would love to continue the conversation."</li>
+          </ul>
+        </div>
+        <details class="qa-accordion">
+          <summary>🎤 Q&amp;A Prep — Questions to ask &amp; questions to expect</summary>
+          <div class="qa-inner">
+            <div class="qa-ask">
+              <p class="qa-col-title">Questions to ask her</p>
+              <ul class="qa-list">
+                <li>"BBG focuses on women and underrepresented founders — how do you think about the perimenopause category specifically? Are you seeing deal flow there?"</li>
+                <li>"You're focused on healthcare and vertical AI — how much weight does clinical validation carry at the pre-seed stage vs. product traction?"</li>
+                <li>"What does BBG's current deployment timeline look like — are you actively investing from Fund III, and what's the typical first-check size?"</li>
+              </ul>
+            </div>
+            <div class="qa-prep">
+              <p class="qa-col-title">What she might ask you</p>
+              <ul class="qa-list">
+                <li><p class="qa-q">"Why is now the right time for this?"</p><p class="qa-a">AI maturity enabling real personalisation, record women's health VC interest, employer menopause benefits becoming mainstream, and 1.2 billion women globally in the transition with no dominant digital player. The window is open right now.</p></li>
+                <li><p class="qa-q">"How are you thinking about Series A — what does that milestone look like?"</p><p class="qa-a">This is your chance to show you're thinking ahead (key panel insight). "Series A is about proving the habit loop, retention, and a clear B2B2C path — employer and payer channel as the scale layer. Pre-seed gets us to [X users, Y months of retention data, Z clinical advisor partnerships]."</p></li>
+                <li><p class="qa-q">"What makes you the right founder to build this?"</p><p class="qa-a">Answer personally and specifically. Your lived experience, the 50+ women you've interviewed, why this problem is personal. BBG invests in founders — make her believe in you.</p></li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ═══ END WORKSHOP ═══ -->
 
 </main>
 
