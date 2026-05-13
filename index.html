@@ -2802,7 +2802,7 @@
     { name:'Javeed Muhammad', role:'Founder & CEO · Bitsol Technologies', time:'Thu 11:00 AM', type:'service', color:'#374151',
       liMsg:"Hi Javeed — great to meet at Women's Health Week. Bitsol's engineering capabilities are directly relevant to seazn's AI forecasting layer and wearable integration roadmap. I'd love to explore whether there's a fit for early-stage collaboration.",
       notMetSteps:["Connect on LinkedIn with a note about the AI + wearable engineering scope","Describe seazn's technical ambitions: AI symptom forecasting + wearable integrations","Schedule a discovery call to scope a potential engagement"] },
-    { name:'Nichole Young-Lin MD MBA', role:'Clinical Lead, Consumer Health GenAI & Women's Health · Google', time:'', type:'partner', color:'#1A7A68',
+    { name:'Nichole Young-Lin MD MBA', role:'Clinical Lead, Consumer Health GenAI & Women’s Health · Google', time:'', type:'partner', color:'#1A7A68',
       liMsg:"Hi Nichole — I hope we connected at Women's Health Week! I'm the founder of seazn, an AI-powered perimenopause companion. Google's GenAI and women's health work is directly relevant to what we're building — would love to explore synergies.",
       notMetSteps:["Connect on LinkedIn leading with the GenAI + women's health intersection","Pitch seazn as the clinical intelligence layer on top of consumer health data","Propose a 20-min virtual conversation about data partnership or distribution"] },
     { name:'Danielle Dobos', role:'Product Manager · Google (AI & Wearables / Fitbit)', time:'', type:'partner', color:'#1A7A68',
@@ -2811,10 +2811,10 @@
     { name:'Charlotte Viard', role:'Business Development Manager · Withings Health Solutions', time:'', type:'partner', color:'#1A7A68',
       liMsg:"Hi Charlotte — great to connect at Women's Health Week. Withings' health monitoring data is highly relevant to seazn's symptom prediction model — I'd love to explore what a partnership between seazn and Withings could look like.",
       notMetSteps:["Connect on LinkedIn with a wearable data + perimenopause angle","Pitch seazn's FlashForward as a use case for Withings' biometric stream","Schedule a 20-min virtual call to explore API or co-marketing partnership"] },
-    { name:'Madeleine Livingston', role:'Director, Women's Health Partnerships · Oura', time:'Oura booth', type:'partner', color:'#8FA882',
+    { name:'Madeleine Livingston', role:'Director, Women\'s Health Partnerships · Oura', time:'Oura booth', type:'partner', color:'#8FA882',
       liMsg:"Hi Madeleine — so glad we connected at the Oura booth at Women's Health Week. Oura's temperature and HRV data is the richest signal available for hormonal fluctuation — and seazn's FlashForward model can turn that into something women actually act on. Would love to explore this further.",
       notMetSteps:["Connect on LinkedIn with a women's health partnership angle","Reference Oura's skin temperature data as a key input for perimenopause prediction","Schedule a strategic partnership call — Madeleine owns the women's health vertical at Oura"] },
-    { name:'Kelsey Radloff', role:'Strategic Partnerships Manager (Women's Health) · Oura', time:'Oura booth', type:'partner', color:'#8FA882',
+    { name:'Kelsey Radloff', role:'Strategic Partnerships Manager (Women\'s Health) · Oura', time:'Oura booth', type:'partner', color:'#8FA882',
       liMsg:"Hi Kelsey — great to connect at the Oura booth at Women's Health Week. I'm building seazn, an AI perimenopause companion — Oura's biometric data is central to what we want to build. Would love to explore what a partnership could look like.",
       notMetSteps:["Connect on LinkedIn — coordinate with Madeleine Livingston for a joint follow-up","Reference the specific Oura data signals relevant to FlashForward","Propose a 3-way intro call with both Oura contacts to align on partnership scope"] },
     { name:'Jasmine Tagesson', role:'COO & Co-Founder · Hormona', time:'Wed 4:30 PM', type:'partner', color:'#d946ef',
@@ -2854,8 +2854,7 @@
       'schedule','book','set up','arrange','invite','connect','introduce','ping',
       'check','look into','explore','discuss','ask about','mention','propose',
       'offer','call','message','linkedin','deck','one-pager','intro'];
-    const sentences = text.split(/[.!?
-]+/).map(s=>s.trim()).filter(s=>s.length>8);
+    const sentences = text.split(/[.!?\n]+/).map(s=>s.trim()).filter(s=>s.length>8);
     const found = [];
     sentences.forEach(s => {
       const lower = s.toLowerCase();
