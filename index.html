@@ -261,7 +261,7 @@
       text-transform: uppercase; color: #b45309; margin-bottom: 5px; }
     .insight-text { font-size: 12.5px; color: #374151; line-height: 1.6; }
 
-    /* ACTION PANEL */
+    /* ACTION PANEL v2 */
     .action-fab { position:fixed; bottom:28px; right:28px; z-index:1000;
       background:linear-gradient(135deg,#4A6741,#2C3B2A); color:white;
       border:none; border-radius:50px; padding:13px 22px 13px 18px;
@@ -276,54 +276,117 @@
     .panel-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.35);
       z-index:1001; opacity:0; pointer-events:none; transition:opacity 0.25s; }
     .panel-overlay.open { opacity:1; pointer-events:all; }
-
-    .action-panel { position:fixed; top:0; right:0; bottom:0; width:min(420px,95vw);
-      background:#fafafa; z-index:1002; transform:translateX(100%);
+    .action-panel { position:fixed; top:0; right:0; bottom:0; width:min(440px,95vw);
+      background:#f8f9fa; z-index:1002; transform:translateX(100%);
       transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);
       display:flex; flex-direction:column; box-shadow:-4px 0 32px rgba(0,0,0,0.15); }
     .action-panel.open { transform:translateX(0); }
-
     .panel-header { background:linear-gradient(135deg,#2C3B2A,#4A6741); color:white;
       padding:18px 20px 16px; display:flex; align-items:center; gap:10px; flex-shrink:0; }
     .panel-header h3 { font-size:16px; font-weight:800; flex:1; margin:0; }
     .panel-close { background:rgba(255,255,255,0.15); border:none; color:white;
       width:30px; height:30px; border-radius:50%; font-size:16px; cursor:pointer;
-      display:flex; align-items:center; justify-content:center; transition:background 0.15s; }
+      display:flex; align-items:center; justify-content:center; }
     .panel-close:hover { background:rgba(255,255,255,0.28); }
-
     .panel-tabs { display:flex; background:white; border-bottom:2px solid #e5e7eb; flex-shrink:0; }
-    .panel-tab { flex:1; padding:10px 8px; border:none; background:none; font-size:12px;
+    .panel-tab { flex:1; padding:10px 4px; border:none; background:none; font-size:11px;
       font-weight:700; color:#9ca3af; cursor:pointer; border-bottom:2px solid transparent;
       margin-bottom:-2px; transition:all 0.15s; }
     .panel-tab.active { color:#4A6741; border-bottom-color:#4A6741; }
+    .panel-body { flex:1; overflow-y:auto; padding:14px; }
 
-    .panel-body { flex:1; overflow-y:auto; padding:16px; }
+    /* MET TOGGLE on cards */
+    .met-toggle { display:inline-flex; align-items:center; gap:5px; padding:4px 10px;
+      border-radius:20px; font-size:11px; font-weight:700; cursor:pointer;
+      border:1.5px solid #e5e7eb; background:white; color:#9ca3af;
+      transition:all 0.2s; margin-top:6px; }
+    .met-toggle:hover { border-color:#4A6741; color:#4A6741; }
+    .met-toggle.met { background:#EBF3E8; border-color:#8FA882; color:#4A6741; }
+    .card.was-met { border-left:4px solid #4A6741; }
+
+    /* SECTION HEADERS in panel */
+    .panel-section-hdr { font-size:10px; font-weight:800; letter-spacing:1.5px;
+      text-transform:uppercase; padding:8px 4px 6px; display:flex; align-items:center;
+      gap:6px; margin-top:4px; }
+    .panel-section-hdr.met-hdr { color:#4A6741; }
+    .panel-section-hdr.notmet-hdr { color:#6b7280; }
+
+    /* PERSON ACCORDION in panel */
+    .pa-item { background:white; border:1px solid #e5e7eb; border-radius:10px;
+      margin-bottom:8px; overflow:hidden; }
+    .pa-item.met-item { border-left:3px solid #4A6741; }
+    .pa-item.notmet-item { border-left:3px solid #d1d5db; }
+    .pa-trigger { width:100%; background:none; border:none; padding:11px 14px;
+      display:flex; align-items:center; gap:8px; cursor:pointer; text-align:left;
+      transition:background 0.15s; }
+    .pa-trigger:hover { background:#f9fafb; }
+    .pa-avatar { width:30px; height:30px; border-radius:50%; display:flex;
+      align-items:center; justify-content:center; font-size:10px; font-weight:800;
+      color:white; flex-shrink:0; }
+    .pa-name { font-size:12.5px; font-weight:700; color:#1a1a2e; flex:1; text-align:left; }
+    .pa-time { font-size:10px; color:#9ca3af; }
+    .pa-chevron { color:#9ca3af; font-size:10px; transition:transform 0.2s; margin-left:4px; }
+    .pa-item.open .pa-chevron { transform:rotate(90deg); }
+    .pa-body { display:none; padding:12px 14px 14px; border-top:1px solid #f3f4f6; }
+    .pa-item.open .pa-body { display:block; }
+
+    /* NOTES PREVIEW */
+    .pa-notes-preview { background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px;
+      padding:10px 12px; font-size:12px; color:#374151; line-height:1.6;
+      margin-bottom:10px; font-style:italic; max-height:90px; overflow-y:auto; }
+    .pa-notes-empty { font-size:12px; color:#9ca3af; font-style:italic; margin-bottom:10px; }
+
+    /* SMART ACTIONS from notes */
+    .smart-actions { margin-bottom:12px; }
+    .smart-actions-title { font-size:10px; font-weight:800; letter-spacing:1px;
+      text-transform:uppercase; color:#E07A54; margin-bottom:7px; }
+    .smart-action-item { display:flex; align-items:flex-start; gap:8px;
+      padding:6px 10px; background:#fff7ed; border:1px solid #fed7aa;
+      border-radius:7px; margin-bottom:5px; font-size:12px; color:#374151; line-height:1.5; }
+    .smart-action-item::before { content:'→'; color:#E07A54; font-weight:700; flex-shrink:0; }
+
+    /* NOT-MET SUGGESTIONS */
+    .notmet-suggestions { margin-bottom:12px; }
+    .notmet-title { font-size:10px; font-weight:800; letter-spacing:1px;
+      text-transform:uppercase; color:#6b7280; margin-bottom:7px; }
+    .notmet-step { display:flex; align-items:flex-start; gap:8px; padding:7px 10px;
+      background:#f9fafb; border:1px solid #e5e7eb; border-radius:7px;
+      margin-bottom:5px; font-size:12px; color:#374151; line-height:1.5; }
+    .notmet-step::before { content:'●'; color:#9ca3af; font-size:8px; flex-shrink:0; margin-top:4px; }
+
+    /* LINKEDIN TEMPLATE */
+    .li-template { background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px;
+      padding:10px 12px; margin-bottom:10px; }
+    .li-template-title { font-size:10px; font-weight:800; letter-spacing:1px;
+      text-transform:uppercase; color:#1d4ed8; margin-bottom:6px; }
+    .li-template-text { font-size:12px; color:#1e40af; line-height:1.6; font-style:italic;
+      margin-bottom:8px; }
+    .copy-li-btn { font-size:11px; font-weight:700; color:#1d4ed8; background:white;
+      border:1px solid #bfdbfe; border-radius:6px; padding:4px 10px; cursor:pointer; }
+    .copy-li-btn:hover { background:#dbeafe; }
+
+    /* CHECKBOXES */
+    .pa-checks { display:flex; flex-direction:column; gap:5px; }
+    .pa-check-row { display:flex; align-items:center; gap:8px; cursor:pointer; padding:3px 0; }
+    .pa-check-row input { width:15px; height:15px; accent-color:#4A6741; cursor:pointer; }
+    .pa-check-row label { font-size:12px; color:#374151; cursor:pointer; }
+    .pa-check-row.done label { text-decoration:line-through; color:#9ca3af; }
+
+    /* PROGRESS */
+    .progress-bar-wrap { background:#e5e7eb; border-radius:4px; height:6px; margin:4px 0 4px; }
+    .progress-bar-fill { background:linear-gradient(90deg,#4A6741,#8FA882); height:6px;
+      border-radius:4px; transition:width 0.4s; }
+    .progress-label { font-size:11px; color:#6b7280; }
 
     /* REMINDERS */
     .reminder-card { background:white; border:1px solid #e5e7eb; border-left:4px solid #f59e0b;
       border-radius:10px; padding:12px 14px; margin-bottom:10px; }
-    .reminder-card.done { opacity:0.5; }
     .reminder-title { font-size:12.5px; font-weight:700; color:#92400e; margin-bottom:3px; }
     .reminder-desc { font-size:12px; color:#6b7280; line-height:1.5; }
 
-    /* CHECKLIST */
-    .person-action { background:white; border:1px solid #e5e7eb; border-radius:10px;
-      padding:12px 14px; margin-bottom:8px; }
-    .person-action-header { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
-    .person-action-name { font-size:13px; font-weight:700; color:#1a1a2e; flex:1; }
-    .person-action-time { font-size:10px; color:#9ca3af; }
-    .action-check-row { display:flex; align-items:center; gap:8px; padding:4px 0; cursor:pointer; }
-    .action-check-row input[type=checkbox] { width:15px; height:15px; accent-color:#4A6741;
-      cursor:pointer; flex-shrink:0; }
-    .action-check-row label { font-size:12px; color:#374151; cursor:pointer; transition:color 0.15s; }
-    .action-check-row.checked label { text-decoration:line-through; color:#9ca3af; }
-    .progress-bar-wrap { background:#e5e7eb; border-radius:4px; height:6px; margin:12px 0 6px; }
-    .progress-bar-fill { background:linear-gradient(90deg,#4A6741,#8FA882); height:6px;
-      border-radius:4px; transition:width 0.4s; }
-    .progress-label { font-size:11px; color:#6b7280; text-align:right; }
-
     /* SYNC */
-    .sync-section { background:white; border:1px solid #C5D9BE; border-radius:12px; padding:16px; margin-bottom:12px; }
+    .sync-section { background:white; border:1px solid #C5D9BE; border-radius:12px;
+      padding:16px; margin-bottom:12px; }
     .sync-title { font-size:12px; font-weight:800; color:#4A6741; letter-spacing:1px;
       text-transform:uppercase; margin-bottom:8px; }
     .sync-desc { font-size:12px; color:#6b7280; line-height:1.55; margin-bottom:12px; }
@@ -336,8 +399,7 @@
     .sync-btn.primary:hover { background:#2C3B2A; }
     .sync-code-area { width:100%; min-height:72px; padding:10px; font-size:11px;
       font-family:monospace; border:1.5px solid #e5e7eb; border-radius:8px;
-      resize:vertical; outline:none; color:#374151; box-sizing:border-box;
-      transition:border-color 0.2s; }
+      resize:vertical; outline:none; color:#374151; box-sizing:border-box; }
     .sync-code-area:focus { border-color:#4A6741; }
     .sync-feedback { font-size:11.5px; color:#4A6741; font-weight:600; margin-top:6px;
       min-height:16px; }
@@ -443,98 +505,71 @@
 
 <!-- ═══════════ ACTION PANEL ═══════════ -->
 <div class="panel-overlay" id="panel-overlay" onclick="closePanel()"></div>
-
 <div class="action-panel" id="action-panel">
   <div class="panel-header">
     <svg width="22" height="22" viewBox="0 0 54 54" fill="none" style="flex-shrink:0">
-      <clipPath id="pc"><circle cx="27" cy="27" r="24"/></clipPath>
-      <g clip-path="url(#pc)">
+      <clipPath id="pc2"><circle cx="27" cy="27" r="24"/></clipPath>
+      <g clip-path="url(#pc2)">
         <path d="M27,27 L27,3 A24,24 0 0,0 3,27 Z" fill="#8FA882"/>
         <path d="M27,27 L51,27 A24,24 0 0,0 27,3 Z" fill="#E07A54"/>
         <path d="M27,27 L27,51 A24,24 0 0,0 51,27 Z" fill="#F5EDD8"/>
         <path d="M27,27 L3,27 A24,24 0 0,0 27,51 Z" fill="#4A6741"/>
       </g>
     </svg>
-    <h3>Actions &amp; Reminders</h3>
+    <h3>Actions &amp; Follow-ups</h3>
     <button class="panel-close" onclick="closePanel()">✕</button>
   </div>
-
   <div class="panel-tabs">
     <button class="panel-tab active" onclick="switchPanelTab('actions',this)">📋 Follow-ups</button>
     <button class="panel-tab" onclick="switchPanelTab('reminders',this)">🔔 Reminders</button>
-    <button class="panel-tab" onclick="switchPanelTab('sync',this)">📱 Sync Notes</button>
+    <button class="panel-tab" onclick="switchPanelTab('sync',this)">📱 Sync</button>
   </div>
-
   <div class="panel-body">
+
     <!-- FOLLOW-UPS TAB -->
     <div id="panel-actions">
-      <div style="margin-bottom:12px;">
+      <div style="margin-bottom:14px;">
         <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
-        <p class="progress-label" id="progress-label">0 of 0 actions complete</p>
+        <p class="progress-label" id="progress-label">Loading…</p>
       </div>
-      <div id="checklist-container"><!-- populated by JS --></div>
+      <div id="checklist-container"></div>
     </div>
 
     <!-- REMINDERS TAB -->
     <div id="panel-reminders" style="display:none">
-      <div class="reminder-card" id="rem-linkedin">
-        <p class="reminder-title">💼 Add everyone on LinkedIn today</p>
-        <p class="reminder-desc">Send personalised connection requests to all 20 contacts — reference a specific moment from your conversation. Don't use the default LinkedIn message.</p>
-      </div>
-      <div class="reminder-card" id="rem-followup">
-        <p class="reminder-title">📧 Follow-ups within 24–48h</p>
-        <p class="reminder-desc">Send follow-up emails or messages within 24–48h of the conference while the memory is fresh. After 72h, response rates drop significantly.</p>
-      </div>
-      <div class="reminder-card" id="rem-preseed">
-        <p class="reminder-title">🫀 Pre-seed = invest in YOU</p>
-        <p class="reminder-desc">Workshop insight: pre-seed investors invest in the founder far more than the company. Lead with your personal story and why you're the right person to build this — not just the numbers.</p>
-      </div>
-      <div class="reminder-card" id="rem-momentum">
-        <p class="reminder-title">📈 Lead with momentum numbers</p>
-        <p class="reminder-desc">Investors invest in momentum — 15 users, 50+ interviews, 500+ social followers, growing MoM. Frame as direction and trajectory, not just a snapshot.</p>
-      </div>
-      <div class="reminder-card" id="rem-seriesa">
-        <p class="reminder-title">🚀 Show the path to Series A</p>
-        <p class="reminder-desc">Even at pre-seed: tell investors what milestones this round buys you and what the company looks like at Series A. Show you're thinking ahead.</p>
-      </div>
-      <div class="reminder-card" id="rem-ai">
-        <p class="reminder-title">🤖 AI de-risking is non-negotiable</p>
-        <p class="reminder-desc">Make it clear you're using AI to de-risk the business — faster iteration, better personalisation, lower cost to serve. Mentioning AI isn't optional in 2026.</p>
-      </div>
-      <div class="reminder-card" id="rem-observer">
-        <p class="reminder-title">👁 Board observer as compromise</p>
-        <p class="reminder-desc">If an investor pushes for a board seat, propose a board observer role (non-voting) as a compromise. Treat your lead investor like a board member anyway — quarterly updates, transparency, ask for opinions.</p>
-      </div>
-      <div class="reminder-card" id="rem-notes">
-        <p class="reminder-title">📝 Add meeting notes while fresh</p>
-        <p class="reminder-desc">Use the voice note button on each card to dictate impressions right after each meeting. Details fade fast — capture while you're still in the moment.</p>
-      </div>
+      <div class="reminder-card"><p class="reminder-title">💼 Add everyone on LinkedIn today</p><p class="reminder-desc">Send personalised connection requests — reference a specific moment from your conversation. Never use the default message.</p></div>
+      <div class="reminder-card"><p class="reminder-title">📧 Follow up within 24–48 hours</p><p class="reminder-desc">Response rates drop significantly after 72h. Strike while the conference energy is still there.</p></div>
+      <div class="reminder-card"><p class="reminder-title">🫀 Pre-seed = invest in YOU</p><p class="reminder-desc">Workshop insight: lead with your personal story and why you're the right founder. Numbers matter less than conviction at this stage.</p></div>
+      <div class="reminder-card"><p class="reminder-title">📈 Lead with momentum</p><p class="reminder-desc">15 users, 50+ interviews, 500+ followers. Frame as trajectory — direction matters more than the snapshot.</p></div>
+      <div class="reminder-card"><p class="reminder-title">🚀 Show the path to Series A</p><p class="reminder-desc">Even at pre-seed: tell investors what milestones this round buys and what the company looks like at Series A.</p></div>
+      <div class="reminder-card"><p class="reminder-title">🤖 AI de-risking is non-negotiable</p><p class="reminder-desc">Make it explicit you're using AI to de-risk — faster iteration, better personalisation, lower cost to serve.</p></div>
+      <div class="reminder-card"><p class="reminder-title">👁 Board observer as compromise</p><p class="reminder-desc">If an investor pushes for a board seat, propose a non-voting observer role. Treat your lead investor like a board member anyway: quarterly updates, transparency, ask for opinions.</p></div>
+      <div class="reminder-card"><p class="reminder-title">📝 Add notes while memory is fresh</p><p class="reminder-desc">Use the voice note on each card immediately after a meeting. Details fade within hours.</p></div>
     </div>
 
     <!-- SYNC TAB -->
     <div id="panel-sync" style="display:none">
       <div class="sync-section">
         <p class="sync-title">📤 Export from this device</p>
-        <p class="sync-desc">Generate a sync code containing all your notes. Copy it and paste it on your other device to transfer everything instantly.</p>
+        <p class="sync-desc">Generates a sync code with all your notes and actions. Copy it and paste on your other device.</p>
         <button class="sync-btn primary" onclick="exportNotes()">Generate sync code</button>
-        <textarea class="sync-code-area" id="export-area" placeholder="Your sync code will appear here…" readonly></textarea>
+        <textarea class="sync-code-area" id="export-area" placeholder="Sync code appears here…" readonly></textarea>
         <button class="sync-btn" onclick="copyCode()" id="copy-btn" style="display:none">📋 Copy to clipboard</button>
         <p class="sync-feedback" id="export-feedback"></p>
       </div>
       <div class="sync-section">
         <p class="sync-title">📥 Import on this device</p>
-        <p class="sync-desc">Paste a sync code from another device to restore all notes here.</p>
+        <p class="sync-desc">Paste a sync code from another device to restore everything here.</p>
         <textarea class="sync-code-area" id="import-area" placeholder="Paste sync code here…"></textarea>
-        <button class="sync-btn primary" onclick="importNotes()" style="margin-top:8px">Restore notes</button>
+        <button class="sync-btn primary" onclick="importNotes()" style="margin-top:8px">Restore notes &amp; actions</button>
         <p class="sync-feedback" id="import-feedback"></p>
       </div>
     </div>
+
   </div>
 </div>
-
-<!-- FAB trigger button -->
 <button class="action-fab" id="action-fab" onclick="openPanel()">
-  📋 Actions <span class="fab-badge" id="fab-badge">0</span>
+  📋 Follow-ups <span class="fab-badge" id="fab-badge">·</span>
 </button>
 <!-- ═══════════ END ACTION PANEL ═══════════ -->
 
@@ -2729,126 +2764,311 @@
 </script>
 
 <script>
-// ─── ACTION PANEL ─────────────────────────────────────────────────────────
+// ─── ACTION PANEL v2 ──────────────────────────────────────────────────────────
 (function() {
   const ACTIONS_KEY  = 'seazn_actions_v2';
+  const MET_KEY      = 'seazn_met_v2';
   const NOTES_PREFIX = 'seazn_note_';
 
-  // All people with meeting times
+  // Full people registry with personalised context
   const PEOPLE = [
-    { name:'Naseem Sayani',       time:'Wed · 3:40 PM',  type:'investor' },
-    { name:'Chetan Srivastava',   time:'Thu · 1:40 PM',  type:'investor' },
-    { name:'Eleonora de Grey',    time:'Wed · 10:40 AM', type:'investor' },
-    { name:'Alison Lurie',        time:'Wed · 11:20 AM', type:'investor' },
-    { name:'Lori Portka',         time:'Thu · 2:30 PM',  type:'investor' },
-    { name:'Gina Bartasi',        time:'Thu · 3:50 PM',  type:'investor' },
-    { name:'George Russo',        time:'Wed · 2:00 PM',  type:'investor' },
-    { name:'Alex Azera',          time:'Wed · 6:00 PM',  type:'investor' },
-    { name:'Christine Spraker',   time:'Wed · 6:15 PM',  type:'investor' },
-    { name:'H3 Technologies',     time:'Thu · 10:00 AM', type:'service'  },
-    { name:'Bitsol Technologies', time:'Thu · 11:00 AM', type:'service'  },
-    { name:'Madeleine Livingston',time:'Oura booth',     type:'partner'  },
-    { name:'Kelsey Radloff',      time:'Oura booth',     type:'partner'  },
-    { name:'Jasmine Tagesson',    time:'Wed · 4:30 PM',  type:'partner'  },
-    { name:'Sonia Farber',        time:'Workshop',        type:'workshop' },
-    { name:'Emma Silverman',      time:'Workshop',        type:'workshop' },
-    { name:'George Ribaroff',     time:'Workshop',        type:'workshop' },
-    { name:'Claire Biernacki',    time:'Workshop',        type:'workshop' },
+    { name:'Naseem Sayani', role:'Investor · GCWC & WHAM', time:'Wed 3:40 PM', type:'investor', color:'#4f46e5',
+      liMsg:"Hi Naseem — it was wonderful connecting at Women's Health Week. Your work at WHAM on closing the women's health funding gap is exactly the ecosystem seazn wants to be part of. I'd love to stay in touch and learn more about the Innovator's Circle.",
+      notMetSteps:["Connect on LinkedIn referencing WHAM's Innovator's Circle","Ask if seazn could be considered for the Innovator's Circle pipeline","Share seazn one-pager and request a 20-min virtual intro call"] },
+    { name:'Chetan Srivastava', role:'Principal · TELUS Global Ventures', time:'Thu 1:40 PM', type:'investor', color:'#0891b2',
+      liMsg:"Hi Chetan — great to connect at Women's Health Week. Loved hearing TELUS Ventures' perspective on digital health. seazn is building the AI-powered perimenopause companion — I think there's a strong thesis overlap. Would love to stay connected.",
+      notMetSteps:["Connect on LinkedIn with a note about digital health investment overlap","Send a brief seazn overview deck","Propose a 20-min virtual intro call"] },
+    { name:'Kendall Nash', role:'Director · 3 Futures Fund', time:'Wed 10:40 AM', type:'investor', color:'#7c3aed',
+      liMsg:"Hi Kendall — great connecting at Women's Health Week. The 3 Futures Fund thesis maps closely to what we're building at seazn — an AI-powered perimenopause companion for 1.2B underserved women. Would love to continue the conversation.",
+      notMetSteps:["Connect on LinkedIn mentioning Women's Health Week","Share seazn's one-pager focused on the market gap","Request a 20-min virtual call to discuss fit with 3 Futures Fund's thesis"] },
+    { name:'Maggie Conway', role:'Principal · WPS Health Ventures', time:'Wed 11:20 AM', type:'investor', color:'#0e7490',
+      liMsg:"Hi Maggie — wonderful to connect at Women's Health Week. WPS Health Ventures' focus on women's health ROI is directly relevant to seazn — we're building the AI companion that reduces unnecessary perimenopause-related healthcare utilisation. Would love to stay in touch.",
+      notMetSteps:["Connect on LinkedIn with a payer/healthcare ROI angle","Frame seazn as a cost-reduction tool for WPS member population","Propose a 30-min call to explore member benefit or outcomes pilot"] },
+    { name:'Peter Hu', role:'Investor · Morningside Ventures', time:'', type:'investor', color:'#065f46',
+      liMsg:"Hi Peter — I hope our paths crossed at Women's Health Week! I'm the founder of seazn, an AI-powered perimenopause health companion. With 1.2B women in the market and no dominant digital player, I think there's a compelling investment case — would love to connect.",
+      notMetSteps:["Connect on LinkedIn with a brief seazn intro","Share the pitch deck or one-pager","Propose a 20-min introductory call"] },
+    { name:'George Russo', role:'Managing Partner · Origyn Solutions', time:'Wed 2:00 PM', type:'investor', color:'#92400e',
+      liMsg:"Hi George — great to connect at Women's Health Week. Really appreciated your perspective at the conference. Looking forward to staying in touch as seazn grows.",
+      notMetSteps:["Connect on LinkedIn referencing Women's Health Week","Follow up on any specific topics discussed or promised","Schedule a virtual follow-up call"] },
+    { name:'Alex Azera', role:'Manager · ONCE Ventures (Otsuka)', time:'Wed 6:00 PM', type:'investor', color:'#4A6741',
+      liMsg:"Hi Alex — great to meet at Women's Health Week. ONCE Ventures' health and wellness mandate is adjacent to seazn's perimenopause space — and Otsuka's broader pharma presence makes for an interesting strategic conversation. Would love to stay connected.",
+      notMetSteps:["Connect on LinkedIn with a note about the health/wellness category overlap","Probe Otsuka's broader corporate venture or pharma interest in digital women's health","Request a brief virtual call to explore strategic fit beyond ONCE's CPG mandate"] },
+    { name:'Christine Spraker', role:'Founder & Managing Partner · CoFoundHer Capital', time:'Wed 6:15 PM', type:'investor', color:'#E07A54',
+      liMsg:"Hi Christine — what a pleasure to meet at Women's Health Week. CoFoundHer's mandate and seazn's mission feel like a natural fit — I'm building the AI-powered perimenopause companion for 1.2B underserved women. Would love to find a time to talk.",
+      notMetSteps:["Connect on LinkedIn leading with the founder-to-founder angle","Reference CoFoundHer's mandate: women founders + healthcare/AI = seazn","Request a 20-min virtual call — Christine will appreciate a direct, personal ask"] },
+    { name:'Alan Gilbert', role:'Senior Advisor · H3Tech', time:'Thu 10:00 AM', type:'service', color:'#374151',
+      liMsg:"Hi Alan — great to connect at Women's Health Week. H3Tech's work in health tech advisory is directly relevant to seazn as we approach our fundraise and want to get our technical architecture investor-ready. Would love to explore whether there's a fit.",
+      notMetSteps:["Connect on LinkedIn with a note about technical advisory for health tech","Ask whether H3Tech works with pre-seed health tech companies approaching a fundraise","Schedule a discovery call to discuss technical due diligence scope"] },
+    { name:'Javeed Muhammad', role:'Founder & CEO · Bitsol Technologies', time:'Thu 11:00 AM', type:'service', color:'#374151',
+      liMsg:"Hi Javeed — great to meet at Women's Health Week. Bitsol's engineering capabilities are directly relevant to seazn's AI forecasting layer and wearable integration roadmap. I'd love to explore whether there's a fit for early-stage collaboration.",
+      notMetSteps:["Connect on LinkedIn with a note about the AI + wearable engineering scope","Describe seazn's technical ambitions: AI symptom forecasting + wearable integrations","Schedule a discovery call to scope a potential engagement"] },
+    { name:'Nichole Young-Lin MD MBA', role:'Clinical Lead, Consumer Health GenAI & Women's Health · Google', time:'', type:'partner', color:'#1A7A68',
+      liMsg:"Hi Nichole — I hope we connected at Women's Health Week! I'm the founder of seazn, an AI-powered perimenopause companion. Google's GenAI and women's health work is directly relevant to what we're building — would love to explore synergies.",
+      notMetSteps:["Connect on LinkedIn leading with the GenAI + women's health intersection","Pitch seazn as the clinical intelligence layer on top of consumer health data","Propose a 20-min virtual conversation about data partnership or distribution"] },
+    { name:'Danielle Dobos', role:'Product Manager · Google (AI & Wearables / Fitbit)', time:'', type:'partner', color:'#1A7A68',
+      liMsg:"Hi Danielle — I hope we crossed paths at Women's Health Week! I'm building seazn, an AI perimenopause companion — Fitbit's biometric data is exactly the signal we want to turn into actionable insights for women in their 40s–50s. Would love to connect.",
+      notMetSteps:["Connect on LinkedIn with a Fitbit-specific integration pitch","Describe FlashForward and the value of Fitbit HRV/sleep data for perimenopause","Request a 20-min call to explore a native integration opportunity"] },
+    { name:'Charlotte Viard', role:'Business Development Manager · Withings Health Solutions', time:'', type:'partner', color:'#1A7A68',
+      liMsg:"Hi Charlotte — great to connect at Women's Health Week. Withings' health monitoring data is highly relevant to seazn's symptom prediction model — I'd love to explore what a partnership between seazn and Withings could look like.",
+      notMetSteps:["Connect on LinkedIn with a wearable data + perimenopause angle","Pitch seazn's FlashForward as a use case for Withings' biometric stream","Schedule a 20-min virtual call to explore API or co-marketing partnership"] },
+    { name:'Madeleine Livingston', role:'Director, Women's Health Partnerships · Oura', time:'Oura booth', type:'partner', color:'#8FA882',
+      liMsg:"Hi Madeleine — so glad we connected at the Oura booth at Women's Health Week. Oura's temperature and HRV data is the richest signal available for hormonal fluctuation — and seazn's FlashForward model can turn that into something women actually act on. Would love to explore this further.",
+      notMetSteps:["Connect on LinkedIn with a women's health partnership angle","Reference Oura's skin temperature data as a key input for perimenopause prediction","Schedule a strategic partnership call — Madeleine owns the women's health vertical at Oura"] },
+    { name:'Kelsey Radloff', role:'Strategic Partnerships Manager (Women's Health) · Oura', time:'Oura booth', type:'partner', color:'#8FA882',
+      liMsg:"Hi Kelsey — great to connect at the Oura booth at Women's Health Week. I'm building seazn, an AI perimenopause companion — Oura's biometric data is central to what we want to build. Would love to explore what a partnership could look like.",
+      notMetSteps:["Connect on LinkedIn — coordinate with Madeleine Livingston for a joint follow-up","Reference the specific Oura data signals relevant to FlashForward","Propose a 3-way intro call with both Oura contacts to align on partnership scope"] },
+    { name:'Jasmine Tagesson', role:'COO & Co-Founder · Hormona', time:'Wed 4:30 PM', type:'partner', color:'#d946ef',
+      liMsg:"Hi Jasmine — it was inspiring to meet you at Women's Health Week. Your work at Hormona has been hugely influential on how I think about the hormonal health space. As a fellow founder building in women's health, I'd love to stay in touch and find ways we can support each other.",
+      notMetSteps:["Connect on LinkedIn with a genuine, peer-to-peer note — no competitive framing","Lead with admiration for Hormona; keep seazn description high-level","Propose a virtual coffee to exchange founder insights — not a pitch"] },
+    { name:'Sonia Farber', role:'Partner · Perkins Coie', time:'Workshop', type:'workshop', color:'#92400e',
+      liMsg:"Hi Sonia — thank you for your insights at the 'VC: Friend or Foe' panel at Women's Health Week. Your perspective on founder protections and board structure was exactly what I needed to hear. I'm the founder of seazn and would love to connect — and potentially explore whether Perkins Coie works with early-stage health tech companies.",
+      notMetSteps:["Connect on LinkedIn referencing a specific insight from her panel comments","Ask whether Perkins Coie takes early-stage health tech clients at the pre-seed stage","Schedule a 20-min discovery call to discuss legal needs ahead of fundraise"] },
+    { name:'Emma Silverman', role:'Partner · TMV', time:'Workshop', type:'workshop', color:'#7c3aed',
+      liMsg:"Hi Emma — loved your perspective at the 'VC: Friend or Foe' panel at Women's Health Week. TMV's Care Economy mandate is a direct match for seazn — I'm building the AI perimenopause companion for 1.2B underserved women. Would love to find time for a 20-min conversation.",
+      notMetSteps:["Connect on LinkedIn referencing the panel and TMV's Care Economy thesis","Send a brief seazn intro with market size and traction","Request a 20-min virtual call — Emma is pre-seed/seed stage, right check size"] },
+    { name:'George Ribaroff, MD', role:'Principal · Meridian Street Capital', time:'Workshop', type:'workshop', color:'#0891b2',
+      liMsg:"Hi George — your MD perspective at the 'VC: Friend or Foe' panel was invaluable. As a physician-turned-investor in digital health, you'd immediately understand the clinical gap seazn addresses. I'm building an AI perimenopause companion — would love 20 minutes to walk you through it.",
+      notMetSteps:["Connect on LinkedIn leading with the MD-VC clinical credibility angle","Reference his point about AI de-risking from the panel","Request a 20-min call — his $1.5M sweet spot and pre-seed focus are a direct fit"] },
+    { name:'Claire Biernacki', role:'Partner · BBG Ventures', time:'Workshop', type:'workshop', color:'#E07A54',
+      liMsg:"Hi Claire — thank you for your insights at the Women's Health Week panel. BBG's mandate — backing women founders in healthcare and vertical AI — describes seazn almost exactly. I'd love to share what we're building. Would you be open to a 20-min virtual intro?",
+      notMetSteps:["Connect on LinkedIn leading with BBG's mandate match for seazn","Reference Claire's healthcare + vertical AI focus — FlashForward is a vertical AI product","Request a 20-min call — BBG is actively deploying $50M into women founders"] },
   ];
 
-  const ACTIONS = ['linkedin','followup','notes','meeting'];
-  const ACTION_LABELS = {
-    linkedin: '💼 Connected on LinkedIn',
-    followup: '📧 Follow-up message sent',
-    notes:    '📝 Meeting notes added',
-    meeting:  '📅 Follow-up meeting booked',
-  };
-
   function slugify(s) { return s.replace(/[^a-zA-Z0-9]/g,'_').toLowerCase(); }
+  function loadActions() { try { return JSON.parse(localStorage.getItem(ACTIONS_KEY)||'{}'); } catch(e){return {};} }
+  function saveActions(d) { localStorage.setItem(ACTIONS_KEY, JSON.stringify(d)); }
+  function loadMet() { try { return JSON.parse(localStorage.getItem(MET_KEY)||'{}'); } catch(e){return {};} }
+  function saveMet(d) { localStorage.setItem(MET_KEY, JSON.stringify(d)); }
 
-  function loadActions() {
-    try { return JSON.parse(localStorage.getItem(ACTIONS_KEY) || '{}'); } catch(e) { return {}; }
-  }
-  function saveActions(data) { localStorage.setItem(ACTIONS_KEY, JSON.stringify(data)); }
-
-  function hasNotes(name) {
+  function getNotes(name) {
     try {
-      const d = JSON.parse(localStorage.getItem(NOTES_PREFIX + slugify(name)) || 'null');
-      return d && d.text && d.text.trim().length > 0;
-    } catch(e) { return false; }
+      const d = JSON.parse(localStorage.getItem(NOTES_PREFIX+slugify(name))||'null');
+      return d && d.text ? d.text.trim() : '';
+    } catch(e){ return ''; }
   }
 
-  function countPendingActions() {
-    const data = loadActions();
-    let total = 0, done = 0;
+  // Extract action items from free-text notes
+  function extractSmartActions(text) {
+    if (!text) return [];
+    const verbs = ['send','share','forward','email','follow up','follow-up','reach out',
+      'schedule','book','set up','arrange','invite','connect','introduce','ping',
+      'check','look into','explore','discuss','ask about','mention','propose',
+      'offer','call','message','linkedin','deck','one-pager','intro'];
+    const sentences = text.split(/[.!?
+]+/).map(s=>s.trim()).filter(s=>s.length>8);
+    const found = [];
+    sentences.forEach(s => {
+      const lower = s.toLowerCase();
+      if (verbs.some(v => lower.includes(v))) {
+        const clean = s.charAt(0).toUpperCase() + s.slice(1);
+        if (!found.includes(clean)) found.push(clean);
+      }
+    });
+    return found.slice(0, 5);
+  }
+
+  // Met-toggle on cards
+  function injectMetToggles() {
+    const metData = loadMet();
+    document.querySelectorAll('.card').forEach(card => {
+      if (card.querySelector('.met-toggle')) return; // already added
+      const nameEl = card.querySelector('.card-name');
+      if (!nameEl) return;
+      const name = Array.from(nameEl.childNodes).filter(n=>n.nodeType===3)
+        .map(n=>n.textContent.trim()).join('') || nameEl.textContent.trim();
+      const slug = slugify(name);
+      const isMet = !!metData[slug];
+
+      const btn = document.createElement('button');
+      btn.className = 'met-toggle' + (isMet?' met':'');
+      btn.id = 'met_btn_' + slug;
+      btn.innerHTML = isMet ? '✓ Met' : '○ Not met yet';
+      btn.title = isMet ? 'Click to unmark' : 'Click when you meet them';
+      btn.onclick = function(e) {
+        e.stopPropagation();
+        const data = loadMet();
+        data[slug] = !data[slug];
+        saveMet(data);
+        btn.className = 'met-toggle' + (data[slug]?' met':'');
+        btn.innerHTML = data[slug] ? '✓ Met' : '○ Not met yet';
+        card.classList.toggle('was-met', !!data[slug]);
+        updateFab();
+        // If panel is open, refresh
+        if (document.getElementById('panel-actions').style.display !== 'none') buildChecklist();
+      };
+      card.classList.toggle('was-met', isMet);
+
+      // Inject into card-identity div
+      const identity = card.querySelector('.card-identity');
+      if (identity) identity.appendChild(btn);
+    });
+  }
+
+  function countStats() {
+    const met = loadMet();
+    const acts = loadActions();
+    const metCount = PEOPLE.filter(p => met[slugify(p.name)]).length;
+    const total = PEOPLE.length;
+    let doneActs=0, totalActs=0;
     PEOPLE.forEach(p => {
-      ACTIONS.forEach(a => {
-        total++;
-        const key = slugify(p.name) + '_' + a;
-        // Auto-detect notes
-        if (a === 'notes') {
-          if (hasNotes(p.name) || data[key]) done++;
-        } else {
-          if (data[key]) done++;
-        }
+      const s=slugify(p.name), isMet=!!met[s];
+      const checks = isMet ? ['linkedin','followup','meeting'] : ['linkedin','outreach'];
+      checks.forEach(a => {
+        totalActs++;
+        if (acts[s+'_'+a]) doneActs++;
       });
     });
-    return { total, done, pending: total - done };
+    return { metCount, total, doneActs, totalActs };
   }
 
   function updateFab() {
-    const { pending } = countPendingActions();
-    const badge = document.getElementById('fab-badge');
-    if (badge) badge.textContent = pending;
+    const { doneActs, totalActs } = countStats();
+    const el = document.getElementById('fab-badge');
+    if (el) el.textContent = (totalActs-doneActs) || '✓';
   }
 
   function buildChecklist() {
     const container = document.getElementById('checklist-container');
     if (!container) return;
-    const data = loadActions();
+    const met = loadMet();
+    const acts = loadActions();
+    const metPeople = PEOPLE.filter(p => met[slugify(p.name)]);
+    const notMetPeople = PEOPLE.filter(p => !met[slugify(p.name)]);
+
     let html = '';
-    PEOPLE.forEach(p => {
-      const slug = slugify(p.name);
-      let allDone = true;
-      let rows = '';
-      ACTIONS.forEach(a => {
-        const key = slug + '_' + a;
-        const notesDone = a === 'notes' && hasNotes(p.name);
-        const checked = data[key] || notesDone;
-        if (!checked) allDone = false;
-        rows += `<div class="action-check-row ${checked?'checked':''}" id="row_${key}">
-          <input type="checkbox" id="chk_${key}" ${checked?'checked':''} onchange="toggleAction('${key}','${p.name}')">
-          <label for="chk_${key}">${ACTION_LABELS[a]}</label>
-        </div>`;
+
+    // ── MET PEOPLE ──
+    if (metPeople.length > 0) {
+      html += `<div class="panel-section-hdr met-hdr">✅ People You Met (${metPeople.length})</div>`;
+      metPeople.forEach(p => {
+        const slug = slugify(p.name);
+        const notes = getNotes(p.name);
+        const smartActions = extractSmartActions(notes);
+        const initials = p.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+        const checks = ['linkedin','followup','meeting'];
+        const checkLabels = { linkedin:'💼 Connected on LinkedIn', followup:'📧 Follow-up message sent', meeting:'📅 Follow-up meeting booked' };
+        let allDone = checks.every(a => acts[slug+'_'+a]);
+
+        let notesSection = notes
+          ? `<div class="pa-notes-preview">${notes.slice(0,200)}${notes.length>200?'…':''}</div>`
+          : `<p class="pa-notes-empty">No notes yet — use the voice button on the card.</p>`;
+
+        let smartSection = '';
+        if (smartActions.length > 0) {
+          smartSection = `<div class="smart-actions"><p class="smart-actions-title">💡 From your notes</p>`;
+          smartActions.forEach(a => { smartSection += `<div class="smart-action-item">${a}</div>`; });
+          smartSection += '</div>';
+        }
+
+        let checksHtml = `<div class="pa-checks">`;
+        checks.forEach(a => {
+          const key = slug+'_'+a, checked=!!acts[key];
+          checksHtml += `<div class="pa-check-row ${checked?'done':''}" id="prow_${key}">
+            <input type="checkbox" id="pchk_${key}" ${checked?'checked':''} onchange="toggleAct('${key}')">
+            <label for="pchk_${key}">${checkLabels[a]}</label></div>`;
+        });
+        checksHtml += '</div>';
+
+        html += `<div class="pa-item met-item" id="pai_${slug}">
+          <button class="pa-trigger" onclick="togglePa('${slug}')">
+            <div class="pa-avatar" style="background:${p.color}">${initials}</div>
+            <span class="pa-name">${p.name}</span>
+            <span class="pa-time">${p.time}</span>
+            <span class="pa-chevron">▸</span>
+          </button>
+          <div class="pa-body">
+            ${notesSection}${smartSection}${checksHtml}
+          </div></div>`;
       });
-      html += `<div class="person-action" style="${allDone?'opacity:0.55':''}">
-        <div class="person-action-header">
-          <span class="person-action-name">${p.name}</span>
-          <span class="person-action-time">${p.time}</span>
-        </div>${rows}</div>`;
-    });
+    }
+
+    // ── NOT MET PEOPLE ──
+    if (notMetPeople.length > 0) {
+      html += `<div class="panel-section-hdr notmet-hdr" style="margin-top:10px">📋 Still to Connect (${notMetPeople.length})</div>`;
+      notMetPeople.forEach(p => {
+        const slug = slugify(p.name);
+        const initials = p.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+        const checks = ['linkedin','outreach'];
+        const checkLabels = { linkedin:'💼 Connected on LinkedIn', outreach:'📤 Follow-up / outreach sent' };
+
+        let stepsHtml = '<div class="notmet-suggestions"><p class="notmet-title">Suggested next steps</p>';
+        p.notMetSteps.forEach(s => { stepsHtml += `<div class="notmet-step">${s}</div>`; });
+        stepsHtml += '</div>';
+
+        const liSafe = p.liMsg.replace(/'/g,"&#39;").replace(/"/g,'&quot;');
+        let liHtml = `<div class="li-template">
+          <p class="li-template-title">💼 LinkedIn message template</p>
+          <p class="li-template-text">${p.liMsg}</p>
+          <button class="copy-li-btn" onclick="copyLi('${liSafe}',this)">📋 Copy message</button>
+        </div>`;
+
+        let checksHtml = '<div class="pa-checks">';
+        checks.forEach(a => {
+          const key=slug+'_'+a, checked=!!acts[key];
+          checksHtml += `<div class="pa-check-row ${checked?'done':''}" id="prow_${key}">
+            <input type="checkbox" id="pchk_${key}" ${checked?'checked':''} onchange="toggleAct('${key}')">
+            <label for="pchk_${key}">${checkLabels[a]}</label></div>`;
+        });
+        checksHtml += '</div>';
+
+        html += `<div class="pa-item notmet-item" id="pai_${slug}">
+          <button class="pa-trigger" onclick="togglePa('${slug}')">
+            <div class="pa-avatar" style="background:${p.color};opacity:0.55">${initials}</div>
+            <span class="pa-name" style="color:#6b7280">${p.name}</span>
+            <span class="pa-time">${p.time||'–'}</span>
+            <span class="pa-chevron">▸</span>
+          </button>
+          <div class="pa-body">
+            ${stepsHtml}${liHtml}${checksHtml}
+          </div></div>`;
+      });
+    }
+
+    if (metPeople.length === 0 && notMetPeople.length === 0) {
+      html = '<p style="text-align:center;color:#9ca3af;font-size:13px;padding:20px">No contacts found.</p>';
+    }
+
     container.innerHTML = html;
     updateProgress();
   }
 
   function updateProgress() {
-    const { total, done } = countPendingActions();
-    const pct = total ? Math.round(done/total*100) : 0;
+    const { doneActs, totalActs, metCount, total } = countStats();
+    const pct = totalActs ? Math.round(doneActs/totalActs*100) : 0;
     const fill = document.getElementById('progress-fill');
     const label = document.getElementById('progress-label');
     if (fill) fill.style.width = pct + '%';
-    if (label) label.textContent = `${done} of ${total} actions complete (${pct}%)`;
+    if (label) label.textContent = `${metCount}/${total} people met · ${doneActs}/${totalActs} actions done (${pct}%)`;
   }
 
-  window.toggleAction = function(key, personName) {
-    const data = loadActions();
-    const chk = document.getElementById('chk_' + key);
-    data[key] = chk ? chk.checked : !data[key];
-    saveActions(data);
-    const row = document.getElementById('row_' + key);
-    if (row) row.classList.toggle('checked', data[key]);
+  window.togglePa = function(slug) {
+    const item = document.getElementById('pai_'+slug);
+    if (item) item.classList.toggle('open');
+  };
+
+  window.toggleAct = function(key) {
+    const acts = loadActions();
+    const chk = document.getElementById('pchk_'+key);
+    acts[key] = chk ? chk.checked : !acts[key];
+    saveActions(acts);
+    const row = document.getElementById('prow_'+key);
+    if (row) row.classList.toggle('done', acts[key]);
     updateProgress();
     updateFab();
+  };
+
+  window.copyLi = function(msg, btn) {
+    const text = msg.replace(/&#39;/g,"'").replace(/&quot;/g,'"');
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => btn.textContent = '📋 Copy message', 2000);
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => btn.textContent = '📋 Copy message', 2000);
+    });
   };
 
   window.openPanel = function() {
@@ -2856,15 +3076,13 @@
     document.getElementById('action-panel').classList.add('open');
     document.getElementById('panel-overlay').classList.add('open');
   };
-
   window.closePanel = function() {
     document.getElementById('action-panel').classList.remove('open');
     document.getElementById('panel-overlay').classList.remove('open');
   };
-
   window.switchPanelTab = function(tab, btn) {
     ['actions','reminders','sync'].forEach(t => {
-      document.getElementById('panel-' + t).style.display = t === tab ? '' : 'none';
+      document.getElementById('panel-'+t).style.display = t===tab ? '' : 'none';
     });
     document.querySelectorAll('.panel-tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -2874,7 +3092,7 @@
   // ── SYNC ────────────────────────────────────────────────────────────────────
   window.exportNotes = function() {
     const data = {};
-    for (let i = 0; i < localStorage.length; i++) {
+    for (let i=0; i<localStorage.length; i++) {
       const k = localStorage.key(i);
       if (k && k.startsWith('seazn_')) data[k] = localStorage.getItem(k);
     }
@@ -2882,21 +3100,14 @@
     const area = document.getElementById('export-area');
     area.value = code;
     document.getElementById('copy-btn').style.display = '';
-    document.getElementById('export-feedback').textContent =
-      `✅ ${Object.keys(data).length} items ready to copy`;
+    document.getElementById('export-feedback').textContent = '✅ ' + Object.keys(data).length + ' items ready';
   };
-
   window.copyCode = function() {
     const area = document.getElementById('export-area');
     navigator.clipboard.writeText(area.value).then(() => {
       document.getElementById('export-feedback').textContent = '✅ Copied! Paste on your other device.';
-    }).catch(() => {
-      area.select();
-      document.execCommand('copy');
-      document.getElementById('export-feedback').textContent = '✅ Copied!';
-    });
+    }).catch(() => { area.select(); document.execCommand('copy'); });
   };
-
   window.importNotes = function() {
     const code = document.getElementById('import-area').value.trim();
     const fb = document.getElementById('import-feedback');
@@ -2904,28 +3115,19 @@
     try {
       const data = JSON.parse(decodeURIComponent(escape(atob(code))));
       let count = 0;
-      Object.entries(data).forEach(([k, v]) => {
-        if (k.startsWith('seazn_')) { localStorage.setItem(k, v); count++; }
-      });
-      fb.textContent = `✅ ${count} items restored! Reload the page to see your notes.`;
+      Object.entries(data).forEach(([k,v]) => { if (k.startsWith('seazn_')) { localStorage.setItem(k,v); count++; } });
+      fb.textContent = '✅ ' + count + ' items restored — reload to see notes.';
       fb.style.color = '#4A6741';
-      updateFab();
-    } catch(e) {
-      fb.textContent = '⚠ Invalid code — make sure you copied it fully';
-      fb.style.color = '#ef4444';
-    }
+      updateFab(); injectMetToggles();
+    } catch(e) { fb.textContent = '⚠ Invalid code'; fb.style.color = '#ef4444'; }
   };
 
-  // Init on load
   document.addEventListener('DOMContentLoaded', function() {
+    injectMetToggles();
     updateFab();
-    // Refresh badge when notes change
-    setInterval(updateFab, 3000);
+    setInterval(updateFab, 4000);
   });
 })();
+})();
 </script>
-
 <!-- ═══════════ END MEETING NOTES ═══════════ -->
-
-</body>
-</html>
