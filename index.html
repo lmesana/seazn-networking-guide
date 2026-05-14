@@ -20,6 +20,10 @@
     header p { font-size: 14px; color: #DDEAE0; max-width: 560px; line-height: 1.5; }
     .header-meta { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
     .header-chip { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: white; font-weight: 500; }
+    .tracker-btn { background: #C99581; color: white; border: none; padding: 11px 18px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.18s, transform 0.12s; font-family: inherit; box-shadow: 0 4px 14px rgba(0,0,0,0.18); display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+    .tracker-btn:hover { background: #B88574; transform: translateY(-1px); }
+    .tracker-btn:active { transform: translateY(0); }
+    .tracker-btn.sending { opacity: 0.7; pointer-events: none; }
 
     /* STATS */
     .stats-bar { background: white; border-bottom: 1px solid #C8D9C8; padding: 12px 40px; display: flex; gap: 28px; font-size: 13px; color: #6b7280; align-items: center; flex-wrap: wrap; }
@@ -557,10 +561,18 @@
 
 <!-- HEADER -->
 <header>
-  <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px;">
-    <img src="assets/seazn-logo.png" alt="seazn" width="54" height="54" style="flex-shrink:0;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,0.18);background:white;"/>
-    <div><div class="header-tag">Conference Networking Guide</div>
-  <h1>seazn × <span>Women's Health Week NYC</span></h1></div></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:10px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <img src="assets/seazn-logo.png" alt="seazn" width="54" height="54" style="flex-shrink:0;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,0.18);background:white;"/>
+      <div>
+        <div class="header-tag">Conference Networking Guide</div>
+        <h1>seazn × <span>Women's Health Week NYC</span></h1>
+      </div>
+    </div>
+    <button class="tracker-btn" onclick="updateTracker()" title="Push your notes + met/not-met status + completed actions to the CRM tracker">
+      <span>📤</span> Update networking tracker
+    </button>
+  </div>
   <p>Bios, networking angles, pitch guidance, sample questions, and Q&amp;A prep.</p>
   <div class="header-meta">
     <span class="header-chip">📅 May 13–14, 2026 · New York City</span>
@@ -4593,3 +4605,60 @@
 })();
 </script>
 <!-- ═══════════ END MEETING NOTES ═══════════ -->
+
+<!-- ═══════════ UPDATE NETWORKING TRACKER (one-click push to CRM) ═══════════ -->
+<script>
+// Where your private CRM tracker lives. Change this after deploying to Vercel
+// (e.g. 'https://seazn-tracker.vercel.app/' or '/tracker.html' if you ever
+// co-deploy them on the same origin).
+const TRACKER_URL = 'http://localhost:8765/tracker.html';
+
+function updateTracker() {
+  const btn = document.querySelector('.tracker-btn');
+  if (btn) { btn.classList.add('sending'); btn.innerHTML = '<span>⌛</span> Packaging…'; }
+
+  // Gather everything the tracker's import handler understands.
+  const payload = { notes: {}, met: {}, actions: {} };
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k.startsWith('seazn_note_')) {
+      try {
+        const v = JSON.parse(localStorage.getItem(k));
+        if (v && v.text && v.text.trim()) payload.notes[k.slice(11)] = v;
+      } catch (e) {}
+    } else if (k === 'seazn_met_v2') {
+      try { payload.met = JSON.parse(localStorage.getItem(k)) || {}; } catch (e) {}
+    } else if (k === 'seazn_actions_v2') {
+      try { payload.actions = JSON.parse(localStorage.getItem(k)) || {}; } catch (e) {}
+    }
+  }
+
+  const nCount = Object.keys(payload.notes).length;
+  const mCount = Object.values(payload.met).filter(Boolean).length;
+  const aCount = Object.values(payload.actions).filter(Boolean).length;
+
+  // Encode in the URL fragment so the tracker can auto-merge on load.
+  const encoded = encodeURIComponent(JSON.stringify(payload));
+  const url = TRACKER_URL + '#import=' + encoded;
+
+  // Most browsers handle URLs up to several MB. Warn if it's getting big.
+  if (url.length > 1500000) {
+    if (!confirm(`Payload is large (~${Math.round(url.length/1024)}KB). Open anyway?`)) {
+      if (btn) { btn.classList.remove('sending'); btn.innerHTML = '<span>📤</span> Update networking tracker'; }
+      return;
+    }
+  }
+
+  const win = window.open(url, '_blank');
+  if (!win) {
+    alert('Popup blocked. Allow popups for this site, or right-click the button to open in a new tab.');
+  }
+  if (btn) {
+    setTimeout(() => {
+      btn.classList.remove('sending');
+      btn.innerHTML = `<span>✓</span> Sent: ${nCount} notes · ${mCount} met · ${aCount} actions`;
+      setTimeout(() => { btn.innerHTML = '<span>📤</span> Update networking tracker'; }, 4000);
+    }, 400);
+  }
+}
+</script>
